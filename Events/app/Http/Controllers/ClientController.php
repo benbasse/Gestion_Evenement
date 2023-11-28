@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -33,15 +34,27 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        //Verifier si l'utilisateur existe dans la base de donnée
         $client = new Client();
         $client->nom = $request->nom;
         $client->prenom = $request->prenom;
         $client->email = $request->email;
-        $client->mot_de_passe = $request->mot_de_passe;
+        // $client->mot_de_passe = $request->mot_de_passe;
+        $client->mot_de_passe = Hash::make( $request->mot_de_passe );
         $client->telephone = $request->telephone;
         $client->save();
         return back()->with("success","vôtre inscription est réussi");
+    }
+
+    public function check()
+    {
+        //Verifier si l'utilisateur existe dans la base de donnée
+        $client =  Client::all();
+        if(!$client)
+        {
+            return view('clients.form');
+        }else {
+            return view("clients.connexion");
+        }
     }
 
     /**
