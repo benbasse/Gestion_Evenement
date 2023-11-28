@@ -14,6 +14,10 @@ class ClientController extends Controller
     {
         return view("clients.form");
     }
+    public function connexion()
+    {
+        return view("clients.connexion");
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +32,16 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        //Verifier si l'utilisateur existe dans la base de donnée
+        $client = new Client();
+        $client->nom = $request->nom;
+        $client->prenom = $request->prenom;
+        $client->email = $request->email;
+        $client->mot_de_passe = $request->mot_de_passe;
+        $client->telephone = $request->telephone;
+        $client->save();
+        return back()->with("success","vôtre inscription est réussi");
     }
 
     /**
