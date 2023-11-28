@@ -1,6 +1,6 @@
 <x-guest-layout>
     {{-- <form method="POST" action="{{ route('inscription') }}" enctype="multipart/form-data"> --}}
-        <form method="POST" action="{{ route('#') }}" enctype="multipart/form-data">
+        <form method="POST" action="#" enctype="multipart/form-data">
 
         @csrf
         Ici c'est le formulaire de login des clients
