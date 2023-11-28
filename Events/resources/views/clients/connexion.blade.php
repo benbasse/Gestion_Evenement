@@ -2,7 +2,7 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     
-    <form method="POST" action="{{ route('login') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{route('connexions')}}" enctype="multipart/form-data">
         @csrf
         ici c'est le formulaire de connexion pour les clients
 
@@ -15,14 +15,14 @@
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="mot_de_passe" :value="__('Password')" />
 
-            <x-text-input id="password" class="block mt-1 w-full"
+            <x-text-input id="mot_de_passe" class="block mt-1 w-full"
                             type="password"
-                            name="password"
+                            name="mot_de_passe"
                             required autocomplete="current-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('mot_de_passe')" class="mt-2" />
         </div>
 
         <!-- Remember Me -->
