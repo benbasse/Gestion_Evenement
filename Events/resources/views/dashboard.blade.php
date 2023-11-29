@@ -29,7 +29,6 @@
 </head>
 
 <body>
-
     {{-- <div class="main-panel">
         <div class="content-wrapper "> --}}
             <div class="row">
@@ -39,16 +38,16 @@
                             <svg class="bi me-2" width="40" height="32">
                                 <use xlink:href="#bootstrap"></use>
                             </svg>
-                            <span class="fs-4">Sidebar</span>
+                            <span class="fs-4">Welcome</span>
                         </a>
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto">
                             <li class="nav-item">
-                                <a href="#" class="nav-link active" aria-current="page">
+                                <a href="/liste" class="nav-link active" aria-current="page">
                                     <svg class="bi me-2" width="16" height="16">
                                         <use xlink:href="#home"></use>
                                     </svg>
-                                    Home
+                                    Events
                                 </a>
                             </li>
                             <li>
@@ -59,14 +58,14 @@
                                     Add Events
                                 </a>
                             </li>
-                            <li>
-                                <a href="/liste" class="nav-link text-white">
+                            {{-- <li>
+                                <a href="#" class="nav-link text-white">
                                     <svg class="bi me-2" width="16" height="16">
                                         <use xlink:href="#table"></use>
                                     </svg>
                                     Events
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="/listeClients" class="nav-link text-white">
                                     <svg class="bi me-2" width="16" height="16">
@@ -93,9 +92,11 @@
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                                 id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://github.com/mdo.png" alt="" width="32" height="32"
+                                <img src="" alt="" width="32" height="32"
                                     class="rounded-circle me-2">
-                                <strong>Profile</strong>
+                                    {{-- <img src="{{ asset('storage/' . $association->logo) }}"
+                                    alt="bien-avatar" style="max-width: 50px; max-height: 100px;"> --}}
+                                <strong></strong>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1"
                                 style="">
@@ -112,9 +113,6 @@
                     @yield('contenue')
                 </div>
             </div>
-
-    {{-- </div>
-    </div> --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class EvenementController extends Controller
 {
@@ -56,20 +57,38 @@ class EvenementController extends Controller
         return view("events.liste", compact("evenement"));
     }
 
+    public function showFront()
+    {
+        $evenement = Evenement::all();
+        return view("welcome", compact("evenement"));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Evenement $evenement)
+    public function edit(Evenement $evenement, $id)
     {
-        //
+        $evenement = Evenement::find($id);
+        return view("events.modifier", compact("evenement"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Evenement $evenement)
+    public function update(Request $request,  $id)
     {
-        //
+        $evenement = Evenement::find($id);
+        $evenement->libelle = $request->get("libelle");
+        $evenement->date_limite_inscription = $request->get("date_limite_inscription");
+        $evenement->description = $request->get("description");
+        if ($request->hasFile("image_mise_en_avant")) 
+        {
+            $evenement->image_mise_en_avant = $this->storeImage($request->image_mise_en_avant);
+        }
+        $evenement->cloture = $request->get("cloture");
+        $evenement->date_evenement = $request->get("date_evenement");
+        $evenement->save();
+        return Redirect::to(route('showEvents'))->with('success', 'vous avez modifier ave success');
     }
 
     /**

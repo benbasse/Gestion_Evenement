@@ -64,9 +64,10 @@ class AssociationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Association $association)
+    public function show(Association $association, $id)
     {
-        //
+        // $association = Association::find($id);
+        // return view('/dashboard', compact('association'));
     }
 
     /**
