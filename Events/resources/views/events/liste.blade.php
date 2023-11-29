@@ -2,7 +2,7 @@
 @section('contenue')
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-<div class="col-7 m-4 p-4 ">
+<div class="col-12 m-4 p-4 ">
     <table class="table">
         <thead>
             <tr>
@@ -30,17 +30,16 @@ integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2
                 <td>{{$evenement->date_limite_inscription}}</td>
                 <td>{{$evenement->date_evenement}}</td>
                 <td>{{$evenement->cloture}}</td>
-                {{-- <td></td> --}}
                 <td>
-                    <form action="#" method="POST">
-                        @method('DELETE')
+                    <form action="{{route('delete', [$evenement->id])}}" method="POST">
+                        @method('delete')
                         @csrf
                         <button type="submit" class="btn btn-danger">
                             <i class="fas fa-trash"></i> Supprimer
                         </button>
-                        <a href="#" class="btn btn-primary">
+                        {{-- <a href="#" class="btn btn-primary">
                             <i class="fas fa-edit"></i> Modifier
-                        </a>
+                        </a> --}}
                     </form>
                 </td>
             </tr>

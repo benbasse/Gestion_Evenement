@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('ajouter', [EvenementController::class,'index'])->name('events');
     Route::get('liste', [EvenementController::class,'show'])->name('showEvents');
     Route::post('ajouter', [EvenementController::class,'store'])->name('ajouter_evenement');
+    Route::delete('ajouter/{id}', [EvenementController::class,'destroy'])->name('delete');
 
     Route::get('listeClients', [ClientController::class,'show'])->name('clients');
 });
