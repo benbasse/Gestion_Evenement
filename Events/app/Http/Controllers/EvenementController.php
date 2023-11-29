@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvenementController extends Controller
 {
@@ -12,7 +13,7 @@ class EvenementController extends Controller
      */
     public function index()
     {
-        //
+        return view("events.ajouter");
     }
 
     /**
@@ -28,15 +29,31 @@ class EvenementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $evenement = new Evenement();
+        $evenement->user_id = Auth::user()->id;
+        $evenement->libelle = $request->get("libelle");
+        $evenement->date_limite_inscription = $request->get("date_limite_inscription");
+        $evenement->description = $request->get("description");
+        $evenement->image_mise_en_avant = $this->storeImage($request->image_mise_en_avant);
+        $evenement->cloture = $request->get("cloture");
+        $evenement->date_evenement = $request->get("date_evenement");
+        $evenement->save();
+        return back()->with("success", "Vous avez ajouter un événement");
+    }
+
+    private function storeImage($image)
+    {
+        return $image->store("evenement", "public");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Evenement $evenement)
+    public function show()
     {
-        //
+        $evenement = Evenement::all();
+        return view("events.liste", compact("evenement"));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientAuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EvenementController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +31,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('ajouter', [EvenementController::class,'index'])->name('events');
+    Route::get('liste', [EvenementController::class,'show'])->name('showEvents');
+    Route::post('ajouter', [EvenementController::class,'store'])->name('ajouter_evenement');
+
+    Route::get('listeClients', [ClientController::class,'show'])->name('clients');
 });
+// Événemet
+
+
+
 
 // //Clients
 Route::get('form', [ClientController::class,'index'])->name('form')->name('inscription');
