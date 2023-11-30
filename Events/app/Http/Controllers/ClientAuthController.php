@@ -13,11 +13,11 @@ class ClientAuthController extends Controller
         public function login(Request $request)
         {
             $evenement = Evenement::all();
-            // dd($request);
+
             $credentials = $request->only('email', 'mot_de_passe');
-            // dd($credentials);
+            
             $user = Client::where('email', $credentials['email'])->first();
-            // dd($user->mot_de_passe);
+            
             if ($user && password_verify ( $credentials['mot_de_passe'] , $user->mot_de_passe )) 
             {
                 Auth::guard('client')->login($user);
@@ -25,7 +25,6 @@ class ClientAuthController extends Controller
             } else {
                 return redirect('form')->with('error', 'Identifiants invalides. Veuillez vous inscrire.');
             }
-            // return redirect('form')->with('error', 'Identifiants invalides. Veuillez vous inscrire.');
         }
         public function logout()
         {

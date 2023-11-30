@@ -35,12 +35,10 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $client = new Client();
         $client->nom = $request->nom;
         $client->prenom = $request->prenom;
         $client->email = $request->email;
-        // $client->mot_de_passe = $request->mot_de_passe;
         $client->mot_de_passe = Hash::make( $request->mot_de_passe );
         $client->telephone = $request->telephone;
         $client->save();

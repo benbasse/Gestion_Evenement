@@ -73,7 +73,7 @@
                         <p class="card-text">{{ $evenement->description }}
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
-                            <form method="post" action="{{ route('reserver', ['evenement_id' => $evenement->id]) }}">
+                            <form method="POST" action="{{ route('reserver', ['evenement_id' => $evenement->id]) }}">
                                 @csrf
                                 <button class="btn btn-primary" type="submit">Réserver</button>
                             </form>

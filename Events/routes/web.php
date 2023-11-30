@@ -56,9 +56,9 @@ Route::post('connexions', [ClientAuthController::class, 'login'])->name('connexi
 
 //Route pour les réservation
 Route::post('/reserver/{evenement_id}', [ReservationController::class, 'reserver'])
-    ->middleware('auth:client') // Assurez-vous que le client est connecté
+    ->middleware('auth:client') 
     ->name('reserver');
 Route::get('listeClients', [ReservationController::class,'index'])->name('client_reserver');
-
+Route::post('update/{id}', [ReservationController::class, 'edit'])->name('update');
 
 require __DIR__.'/auth.php';

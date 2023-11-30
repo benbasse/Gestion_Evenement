@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('client_id')->constrained();
             $table->foreignId('evenement_id')->constrained();
-            $table->boolean('est_accepter_ou_pas')->default(false);    
+            $table->boolean('est_accepter_ou_pas')->default(true);    
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

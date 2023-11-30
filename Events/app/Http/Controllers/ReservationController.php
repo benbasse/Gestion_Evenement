@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
 
 class ReservationController extends Controller
 {
@@ -21,6 +24,7 @@ class ReservationController extends Controller
     {
         // Récupérez l'utilisateur connecté (client)
         $client = Auth::guard('client')->user();
+        // dd($client);
 
         if ($client) {
             // Vérifiez si la réservation existe déjà
@@ -33,15 +37,15 @@ class ReservationController extends Controller
                 Reservation::create([
                     'client_id' => $client->id,
                     'evenement_id' => $evenement_id,
-                    'est_accepter_ou_pas' => false,
+                    'est_accepter_ou_pas' => true,
                 ]);
-                return back()->with('success','Vous avez réserver à cette événement');
+                return Redirect::to('/')->with('success','Vous avez réserver à cette événement');
             } else {
-                // Ajoutez une logique pour gérer le cas où la réservation existe déjà
-                // Peut-être une redirection avec un message d'erreur, par exemple
+                return Redirect::to('/')->with('success', 'vous ne pouvez pas refaire une reservation');
             }
         } else {
             // L'utilisateur n'est pas connecté, ajoutez une logique de redirection ou de message d'erreur
+            
         }
     }
 
@@ -74,7 +78,13 @@ class ReservationController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $reservation = Reservation::find($id);
+        $reservation->est_accepter_ou_pas = false;
+        if ($reservation->update()) 
+        {
+            // dd('reservation');
+            return back();
+        }
     }
 
     /**
