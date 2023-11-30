@@ -19,33 +19,32 @@ class ReservationController extends Controller
         $reservation = Reservation::all(); 
         return view("clients.listeClients", compact("reservation"));
     }
-   
+
     public function reserver($evenement_id)
     {
-        // Récupérez l'utilisateur connecté (client)
         $client = Auth::guard('client')->user();
-        // dd($client);
-
-        if ($client) {
-            // Vérifiez si la réservation existe déjà
+        if ($client) 
+        {
             $reservationExistante = Reservation::where('client_id', $client->id)
                 ->where('evenement_id', $evenement_id)
                 ->first();
-
-            if (!$reservationExistante) {
-                // Créez une nouvelle réservation
+            if (!$reservationExistante) 
+            {
                 Reservation::create([
                     'client_id' => $client->id,
                     'evenement_id' => $evenement_id,
                     'est_accepter_ou_pas' => true,
                 ]);
                 return Redirect::to('/')->with('success','Vous avez réserver à cette événement');
-            } else {
+            } 
+            else 
+            {
                 return Redirect::to('/')->with('success', 'vous ne pouvez pas refaire une reservation');
             }
-        } else {
-            // L'utilisateur n'est pas connecté, ajoutez une logique de redirection ou de message d'erreur
-            
+        } 
+        else 
+        {
+            return Redirect::to('connexion');
         }
     }
 

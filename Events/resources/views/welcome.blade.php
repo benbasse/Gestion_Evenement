@@ -27,13 +27,13 @@
                 @endauth
                 @guest('client')
                     <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link active" href="{{ route('connexion') }}">Connexion
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('inscription') }}">S'inscrire</a>
-                        </li>
+                        </li> --}}
                     </ul>
                     {{-- Association --}}
                     <form class="d-flex">
@@ -49,7 +49,7 @@
                                     connecter</a>
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}"class="btn btn-secondary my-2 my-sm-0"
-                                        type="submit">Register</a>
+                                        type="submit">Inscrire</a>
                                 @endif
                             @endauth
                         @endif
@@ -69,10 +69,12 @@
                     <img src="{{ asset('storage/' . $evenement->image_mise_en_avant) }}" alt="bien-avatar"
                                 style="max-width: 600px; max-height: 300px;">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $evenement->id }}</h5>
+                        <h5 class="card-title">{{ $evenement->libelle }}</h5>
                         <p class="card-text">{{ $evenement->description }}
                             Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
+                            <div class="card-footer bg-transparent border-success">Date Événement :{{$evenement->date_evenement}}</div>
+                            <div class="card-footer bg-transparent border-success">Date Limite :{{$evenement->date_limite_inscription}}</div>
                             <form method="POST" action="{{ route('reserver', ['evenement_id' => $evenement->id]) }}">
                                 @csrf
                                 <button class="btn btn-primary" type="submit">Réserver</button>
