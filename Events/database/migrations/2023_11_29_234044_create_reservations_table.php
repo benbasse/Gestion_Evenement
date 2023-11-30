@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            // $table->string('reference')->unique()->default(now().uniqid());
             $table->foreignId('client_id')->constrained();
             $table->foreignId('evenement_id')->constrained();
+            $table->integer('nombre_place');
             $table->boolean('est_accepter_ou_pas')->default(true);    
             $table->timestamps();
         });
