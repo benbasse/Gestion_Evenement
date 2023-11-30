@@ -57,6 +57,7 @@ class EvenementController extends Controller
     public function show()
     {
         $evenement = Evenement::all();
+        $user = Auth::user()->id;
         return view("events.liste", compact("evenement", "user"));
     }
 
