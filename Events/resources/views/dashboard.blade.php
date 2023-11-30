@@ -1,21 +1,3 @@
-{{-- <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in the part Association!") }}
-                </div>
-            </div>
-        </div>
-    </div>
-</x-app-layout> --}}
-{{-- <x-app-layout> --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,8 +11,6 @@
 </head>
 
 <body>
-    {{-- <div class="main-panel">
-        <div class="content-wrapper "> --}}
             <div class="row">
                 <div class="col-md-2">
                     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 870px">
@@ -38,7 +18,7 @@
                             <svg class="bi me-2" width="40" height="32">
                                 <use xlink:href="#bootstrap"></use>
                             </svg>
-                            <span class="fs-4">Welcome</span>
+                            <span class="fs-4"></span>
                         </a>
                         <hr>
                         <ul class="nav nav-pills flex-column mb-auto">
@@ -58,14 +38,6 @@
                                     Add Events
                                 </a>
                             </li>
-                            {{-- <li>
-                                <a href="#" class="nav-link text-white">
-                                    <svg class="bi me-2" width="16" height="16">
-                                        <use xlink:href="#table"></use>
-                                    </svg>
-                                    Events
-                                </a>
-                            </li> --}}
                             <li>
                                 <a href="/listeClients" class="nav-link text-white">
                                     <svg class="bi me-2" width="16" height="16">
@@ -92,7 +64,7 @@
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                                 id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="" alt="" width="32" height="32"
+                                <img src="{{ asset('storage/' . $user->logo) }}" alt="" width="32" height="32"
                                     class="rounded-circle me-2">
                                     {{-- <img src="{{ asset('storage/' . $association->logo) }}"
                                     alt="bien-avatar" style="max-width: 50px; max-height: 100px;"> --}}
