@@ -57,7 +57,7 @@ class EvenementController extends Controller
     public function show()
     {
         $evenement = Evenement::all();
-        return view("events.liste", compact("evenement"));
+        return view("events.liste", compact("evenement", "user"));
     }
 
     public function showFront()
@@ -102,7 +102,7 @@ class EvenementController extends Controller
         $evenement = Evenement::find( $id );
         $evenement->destroy($id);
         if ($evenement->save()) {
-            return back()->with("success","vous avez supprimer cette événement");
+            return back()->with("destroy","vous avez supprimer cette événement");
         }
     }
 }
