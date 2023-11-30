@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ReservationMail;
 use App\Models\Client;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Redirect;
 
 class ReservationController extends Controller
 {
@@ -34,7 +36,9 @@ class ReservationController extends Controller
                     'nombre_place' => $request->nombre_place,
                     'est_accepter_ou_pas' => true,
                 ]);
+                Mail::to('basse@gmail.com')->send(new ReservationMail());
                 return Redirect::to('/')->with('success','Vous avez réserver à cette événement');
+                
         //     } 
         //     else 
         //     {
@@ -44,7 +48,9 @@ class ReservationController extends Controller
         // else 
         // {
         //     return Redirect::to('connexion');
-        }return Redirect::to('connexion');
+        }
+        
+        return Redirect::to('connexion');
     }
     public function create()
     {
@@ -66,6 +72,8 @@ class ReservationController extends Controller
         {
             return back()->with("update", "Vous avez réfuser la demande de réservation");
         }
+        Mail::to('basse@gmail.com')->send(new ReservationMail());
+
     }
     public function update(Request $request, string $id)
     {
