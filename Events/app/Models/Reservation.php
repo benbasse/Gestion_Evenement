@@ -11,14 +11,24 @@ class Reservation extends Model
     protected $fillable = [
         "client_id",
         "evenement_id",
+        "references",
+        "nombre_place"
     ];
     public function client()
     {
         return $this->belongsTo(Client::class);
     }
-    
+    // public function getReferenceAttribute()
+    // {
+    //     return date('Ymd') . uniqid();
+    // }
     public function evenement()
     {
         return $this->belongsTo(Evenement::class);
     }
+
+    protected $casts = [
+        '1', 'Accepeter',
+        '0', 'Refuser'
+    ];
 }
