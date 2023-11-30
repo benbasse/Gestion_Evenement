@@ -11,92 +11,66 @@ use Illuminate\Support\Facades\Redis;
 
 class ReservationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $reservation = Reservation::all(); 
         return view("clients.listeClients", compact("reservation"));
     }
-
-    public function reserver($evenement_id)
+    public function reserver(Request $request, $evenement_id)
     {
-        $client = Auth::guard('client')->user();
-        if ($client) 
-        {
-            $reservationExistante = Reservation::where('client_id', $client->id)
-                ->where('evenement_id', $evenement_id)
-                ->first();
-            if (!$reservationExistante) 
-            {
-                Reservation::create([
+        if($client = Auth::guard('client')->user()){
+        // }
+        // if ($client) 
+        // {
+        //     $reservationExistante = Reservation::where('client_id', $client->id)
+        //         ->where('evenement_id', $evenement_id)
+        //         ->first();
+        //     if (!$reservationExistante) 
+        //     {
+                Reservation::create
+                ([
                     'client_id' => $client->id,
                     'evenement_id' => $evenement_id,
+                    'nombre_place' => $request->nombre_place,
                     'est_accepter_ou_pas' => true,
                 ]);
                 return Redirect::to('/')->with('success','Vous avez réserver à cette événement');
-            } 
-            else 
-            {
-                return Redirect::to('/')->with('success', 'vous ne pouvez pas refaire une reservation');
-            }
-        } 
-        else 
-        {
-            return Redirect::to('connexion');
-        }
+        //     } 
+        //     else 
+        //     {
+        //         return Redirect::to('/')->with('error', 'vous ne pouvez pas refaire une reservation');
+        //     }
+        // } 
+        // else 
+        // {
+        //     return Redirect::to('connexion');
+        }return Redirect::to('connexion');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $reservation = Reservation::find($id);
         $reservation->est_accepter_ou_pas = false;
         if ($reservation->update()) 
         {
-            // dd('reservation');
-            return back();
+            return back()->with("update", "Vous avez réfuser la demande de réservation");
         }
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
