@@ -64,8 +64,8 @@
                         <div class="dropdown">
                             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                                 id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="{{ asset('storage/' . $user->logo) }}" alt="" width="32" height="32"
-                                    class="rounded-circle me-2">
+                                {{-- <img src="{{ asset('storage/' . ) }}" alt="" width="32" height="32"
+                                    class="rounded-circle me-2"> --}}
                                     {{-- <img src="{{ asset('storage/' . $association->logo) }}"
                                     alt="bien-avatar" style="max-width: 50px; max-height: 100px;"> --}}
                                 <strong></strong>
