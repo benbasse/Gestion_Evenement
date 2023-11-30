@@ -4,7 +4,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <div class="col-12 m-4 p-4 ">
         <table class="table">
-            <thead>
+            <thead class="thead-dark"> 
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Image</th>
@@ -28,7 +28,7 @@
                         <td>{{ $evenement->description }}</td>
                         <td>{{ $evenement->date_limite_inscription }}</td>
                         <td>{{ $evenement->date_evenement }}</td>
-                        <td>{{ $evenement->cloture }}</td>
+                        <td>{{ $evenement->cloture ? 'OUI' : 'NON' }}</td>
                         <td>
                             <form action="{{ route('delete', [$evenement->id]) }}" method="POST">
                                 @method('delete')
