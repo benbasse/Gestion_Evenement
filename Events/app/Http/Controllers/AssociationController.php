@@ -54,7 +54,7 @@ class AssociationController extends Controller
         $association->date_creation = $request->date_creation;
         $association->save();
         // dd($association);
-        return redirect("")->with("success","Vôtre inscription a réussi");
+        return redirect("/")->with("success","Vôtre inscription a réussi");
     }
     private function storeImage($image)
     {

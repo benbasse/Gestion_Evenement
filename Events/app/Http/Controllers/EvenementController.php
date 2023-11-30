@@ -31,6 +31,9 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $request->validate([
+            "image_mise_en_avant"=> "required|image|max:5000",
+        ]);
         $evenement = new Evenement();
         $evenement->user_id = Auth::user()->id;
         $evenement->libelle = $request->get("libelle");

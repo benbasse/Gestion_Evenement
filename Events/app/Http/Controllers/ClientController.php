@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,7 +18,8 @@ class ClientController extends Controller
     }
     public function connexion()
     {
-        return view("clients.connexion");
+        $evenement = Evenement::all();
+        return view("clients.connexion", compact("evenement"));
     }
 
     /**

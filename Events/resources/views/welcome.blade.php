@@ -18,35 +18,43 @@
                 aria-controls="navbarColor04" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarColor04">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{route('connexion')}}">Connexion
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('inscription')}}">S'inscrire</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-
-                    @if (Route::has('login'))
-                        @auth
-                            {{-- <a href="{{ url('/dashboard') }}" --}}
-                            <a href="#"
-                                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-                            <input class="form-control me-sm-2" type="search" placeholder="Search">
-                        @else
-                            {{-- <a href="{{ route('login') }}" class="btn btn-dark"> Connexion</a> --}}
-                            <a href="{{ route('login') }}" class="btn btn-secondary my-2 my-sm-0" type="submit">Se
-                                connecter</a>
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}"class="btn btn-secondary my-2 my-sm-0"
-                                    type="submit">Register</a>
-                            @endif
-                        @endauth
-                    @endif
-                </form>
+            <div class="collapse navbar-collapse my-2 my-sm-0" id="navbarColor04">
+                @auth('client')
+                    <form method="post" action="{{ route('client.logout') }}">
+                        @csrf
+                        <button class="btn btn-primary " type="submit">Déconnexion</button>
+                    </form>
+                @endauth
+                @guest('client')
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('connexion') }}">Connexion
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('inscription') }}">S'inscrire</a>
+                        </li>
+                    </ul>
+                    {{-- Association --}}
+                    <form class="d-flex">
+                        @if (Route::has('login'))
+                            @auth
+                                {{-- <a href="{{ url('/dashboard') }}" --}}
+                                <a href="#"
+                                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                                <input class="form-control me-sm-2" type="search" placeholder="Search">
+                            @else
+                                {{-- <a href="{{ route('login') }}" class="btn btn-dark"> Connexion</a> --}}
+                                <a href="{{ route('login') }}" class="btn btn-secondary my-2 my-sm-0" type="submit">Se
+                                    connecter</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}"class="btn btn-secondary my-2 my-sm-0"
+                                        type="submit">Register</a>
+                                @endif
+                            @endauth
+                        @endif
+                    </form>
+                @endguest
             </div>
         </div>
         </div>
@@ -54,20 +62,25 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card" style="width: 18rem;">
-                {{-- @foreach ($evenement as $evenement)                     --}}
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                    {{-- <h5 class="card-title">{{$evenement->id}}</h5> --}}
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                        content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <div class="row m-1">
+        @foreach ($evenement as $evenement)
+            <div class="col-md-4 mb-6 p-2">
+                <div class="card">
+                    <img src="{{ asset('storage/' . $evenement->image_mise_en_avant) }}" alt="bien-avatar"
+                                style="max-width: 600px; max-height: 300px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $evenement->id }}</h5>
+                        <p class="card-text">{{ $evenement->description }}
+                            Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                            <form method="post" action="{{ route('reserver', ['evenement_id' => $evenement->id]) }}">
+                                @csrf
+                                <button class="btn btn-primary" type="submit">Réserver</button>
+                            </form>
+                    </div>
                 </div>
-                {{-- @endforeach --}}
             </div>
-        </div>
+        @endforeach
     </div>
 </body>
 

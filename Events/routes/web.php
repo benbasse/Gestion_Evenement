@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\AssociationController;
-use App\Http\Controllers\ClientAuthController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\EvenementController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\ClientAuthController;
+use App\Http\Controllers\AssociationController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 //Associations
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,23 +38,27 @@ Route::middleware('auth')->group(function () {
     Route::delete('ajouter/{id}', [EvenementController::class,'destroy'])->name('delete');
     Route::get('modifier/{id}', [EvenementController::class,'edit'])->name('edit');
     Route::post('modifier/{id}', [EvenementController::class,'update'])->name('modifier');
-
     Route::get('listeClients', [ClientController::class,'show'])->name('clients');
+
 });
 // Événemet
-
-
 Route::get('/', [EvenementController::class,'showFront'])->name('showEventsFront');
 
-
-// //Clients
+//Clients
 Route::get('form', [ClientController::class,'index'])->name('inscription');
 Route::get('connexion', [ClientController::class,'connexion'])->name('connexion');
 Route::post('form', [ClientController::class,'store']);
 
 //Verification clients
 // Route::get('form', [ClientAuthController::class,'form']);
+Route::post('/client/logout', [ClientAuthController::class, 'logout'])->name('client.logout');
 Route::post('connexions', [ClientAuthController::class, 'login'])->name('connexions');
+
+//Route pour les réservation
+Route::post('/reserver/{evenement_id}', [ReservationController::class, 'reserver'])
+    ->middleware('auth:client') // Assurez-vous que le client est connecté
+    ->name('reserver');
+Route::get('listeClients', [ReservationController::class,'index'])->name('client_reserver');
 
 
 require __DIR__.'/auth.php';
