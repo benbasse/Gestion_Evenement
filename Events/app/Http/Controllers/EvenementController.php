@@ -65,13 +65,15 @@ class EvenementController extends Controller
     }
     public function show()
     {
-        $evenement = Evenement::all();
-        $user = Auth::user()->id;
-        // $evenement = Evenement::find([
-        //     'user_id' => Auth::user()->id,
-        // ]);
+        // $evenement = Evenement::all();
+        // $user = Auth::user()->id;
+
+        $evenement = Evenement::where(
+            'user_id' , Auth::user()->id,
+        )->get();
+        // dd($evenement);
         // Je dois gerer aussi au niveau de la liste des clients je dois lister seulement les clients et l'événement que seulement le user connecter à publier et aussi pour les liste aussi
-        return view("events.liste", compact("evenement", "user"));
+        return view("events.liste", compact("evenement"));
     }
 
     public function showFront()

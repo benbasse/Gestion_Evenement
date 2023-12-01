@@ -3,6 +3,13 @@
 <legend>
     Ajouter Un Événement    
 </legend>
+@if (session()->has('success'))
+<div class="alert alert-dismissible alert-primary">
+    <strong>
+        {{ session()->get('success') }}
+    </strong>
+</div>
+@endif
     <form action="{{route('ajouter_evenement')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">

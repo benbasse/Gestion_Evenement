@@ -3,6 +3,13 @@
 <legend>
     Modifier l'événement    
 </legend>
+@if (session()->has('success'))
+<div class="alert alert-dismissible alert-primary">
+    <strong>
+        {{ session()->get('success') }}
+    </strong>
+</div>
+@endif
     <form action="{{route('edit', [$evenement->id])}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">

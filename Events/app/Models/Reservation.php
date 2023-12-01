@@ -18,10 +18,6 @@ class Reservation extends Model
     {
         return $this->belongsTo(Client::class);
     }
-    // public function getReferenceAttribute()
-    // {
-    //     return date('Ymd') . uniqid();
-    // }
     public function evenement()
     {
         return $this->belongsTo(Evenement::class);

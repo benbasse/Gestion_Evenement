@@ -39,12 +39,14 @@ class ReservationController extends Controller
                 ]
             );
                 Reservation::create
-                ([
+                (
+                    [
                     'client_id' => $client->id,
                     'evenement_id' => $evenement_id,
                     'nombre_place' => $request->nombre_place,
                     'est_accepter_ou_pas' => true,
-                ]);
+                    ]
+                );
                 Mail::to('basse@gmail.com')->send(new ReservationMail());
                 return Redirect::to('/')->with('success','Vous avez réserver à cette événement');
                 
@@ -79,7 +81,7 @@ class ReservationController extends Controller
         $reservation->est_accepter_ou_pas = false;
         if ($reservation->update()) 
         {
-            return back()->with("update", "Vous avez réfuser la demande de réservation");
+            return back()->with("success", "Vous avez réfuser la demande de réservation");
         }
         Mail::to('basse@gmail.com')->send(new ReservationMail());
 

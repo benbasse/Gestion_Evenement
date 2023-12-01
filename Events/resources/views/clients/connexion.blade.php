@@ -1,4 +1,11 @@
 <x-guest-layout>
+    @if (session()->has('error'))
+    <div class="alert alert-dismissible alert-primary">
+        <strong>
+            {{ session()->get('error') }}
+        </strong>
+    </div>
+@endif
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
     

@@ -1,3 +1,10 @@
+@if (session()->has('success'))
+<div class="alert alert-dismissible alert-primary">
+    <strong>
+        {{ session()->get('success') }}
+    </strong>
+</div>
+@endif
 <x-guest-layout>
     {{-- <form method="POST" action="{{ route('inscription') }}" enctype="multipart/form-data"> --}}
         <form method="POST" action="#" enctype="multipart/form-data">
