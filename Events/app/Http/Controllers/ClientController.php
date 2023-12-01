@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Evenement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 
 class ClientController extends Controller
 {
@@ -58,7 +59,7 @@ class ClientController extends Controller
         $client->mot_de_passe = Hash::make( $request->mot_de_passe );
         $client->telephone = $request->telephone;
         $client->save();
-        return back()->with("success","vôtre inscription est réussi");
+        return Redirect::to('/')->with("success","vôtre inscription est réussi");
     }
 
     public function check()

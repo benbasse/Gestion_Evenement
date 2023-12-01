@@ -26,7 +26,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
 //Associations
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -43,7 +42,6 @@ Route::middleware('auth')->group(function () {
 });
 // Événemet
 Route::get('/', [EvenementController::class,'showFront'])->name('showEventsFront');
-
 //Clients
 Route::get('form', [ClientController::class,'index'])->name('inscription');
 Route::get('connexion', [ClientController::class,'connexion'])->name('connexion');
