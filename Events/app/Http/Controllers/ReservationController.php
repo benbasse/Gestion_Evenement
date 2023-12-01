@@ -20,7 +20,8 @@ class ReservationController extends Controller
     }
     public function reserver(Request $request, $evenement_id)
     {
-        if($client = Auth::guard('client')->user()){
+        if($client = Auth::guard('client')->user())
+        {
         // }
         // if ($client) 
         // {
@@ -29,6 +30,14 @@ class ReservationController extends Controller
         //         ->first();
         //     if (!$reservationExistante) 
         //     {
+            $request->validate(
+                [
+                    'nombre_place'=>'required|integer'
+                ],
+                [   
+                    'nombre_place'=>'Le nombre de place ne peut pas être null'
+                ]
+            );
                 Reservation::create
                 ([
                     'client_id' => $client->id,

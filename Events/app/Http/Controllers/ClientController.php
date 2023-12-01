@@ -35,6 +35,22 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        //Les validations des donnés 
+        $request->validate(
+            [
+                'nom'=>'required|string|min:3',
+                'prenom'=>'required|string|min:3',
+                'email'=>'required|string',
+                'mot_de_passe'=>'required|min:8',
+                'telephone'=>'required|integer',
+            ],[
+                'nom'=>'Le nom doit supérieur à 3 et doit être composé par des lettres',
+                'prenom'=>'Le prenom doit supérieur à 3',
+                'email'=>'L\'email que vous essayez d\'entrer est invalid',
+                'mot_de_passe'=>'Le mot de passe doit être supérieur à huit lettre ou chiffres ',
+                'telephone'=>'Le numéro de téléphone que vous entrez doit être égale à 9',
+            ]
+            );
         $client = new Client();
         $client->nom = $request->nom;
         $client->prenom = $request->prenom;
@@ -48,7 +64,7 @@ class ClientController extends Controller
     public function check()
     {
         //Verifier si l'utilisateur existe dans la base de donnée
-        $client =  Client::all();
+        $client =  Client::find();
         if(!$client)
         {
             return view('clients.form');
